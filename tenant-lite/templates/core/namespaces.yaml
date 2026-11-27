@@ -1,4 +1,9 @@
 {{- range $id, $data := .Values.namespaces }}
+{{- $data = mustMergeOverwrite
+  (dict)
+  ($.Values.namespaceDefaults | default dict | deepCopy)
+  (deepCopy $data)
+}}
 {{- with include "tenant.data" (dict "root" $ "id" $id "data" $data) | fromYaml }}
 ---
 apiVersion: v1

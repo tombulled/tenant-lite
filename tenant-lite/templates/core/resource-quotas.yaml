@@ -1,4 +1,9 @@
 {{- range $id, $data := .Values.resourceQuotas }}
+{{- $data = mustMergeOverwrite
+  (dict)
+  ($.Values.resourceQuotaDefaults | default dict | deepCopy)
+  (deepCopy $data)
+}}
 {{- with include "tenant.data" (dict "root" $ "id" $id "data" $data) | fromYaml }}
 ---
 apiVersion: v1

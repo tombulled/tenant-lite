@@ -1,3 +1,7 @@
+namespaceDefaults:
+  annotations:
+    is-namespace: "true"
+
 namespaces:
   aaa:
     name: fu
