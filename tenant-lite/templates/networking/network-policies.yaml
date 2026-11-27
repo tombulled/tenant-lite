@@ -1,0 +1,13 @@
+{{- range $id, $data := .Values.networkPolicies }}
+{{- with include "tenant.data" (dict "root" $ "id" $id "data" $data "defaults" $.Values.networkPolicyDefaults) | fromYaml }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+{{ include "tenant.metadata" . }}
+spec:
+  {{- include "tenant.field.list" (list "egress" .egress 2) }}
+  {{- include "tenant.field.list" (list "ingress" .ingress 2) }}
+  {{- include "tenant.field" (list "podSelector" .podSelector 2) }}
+  {{- include "tenant.field" (list "policyTypes" .policyTypes 2) }}
+{{- end }}
+{{- end }}
