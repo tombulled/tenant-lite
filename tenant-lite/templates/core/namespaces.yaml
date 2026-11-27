@@ -1,10 +1,11 @@
 {{- range $id, $_ := .Values.namespaces }}
-{{- $name := .name | default $id }}
+{{- if eq .name nil }}
+  {{- $_ := set . "name" $id }}
+{{- end }}
 ---
 apiVersion: v1
 kind: Namespace
 {{ include "tenant.metadata" . }}
-{{ omit (include "tenant.metadata" . | fromYaml) "namespace" "finalizers" }}
 spec:
-  finalizers: []
+  finalizers: "todo"
 {{- end }}

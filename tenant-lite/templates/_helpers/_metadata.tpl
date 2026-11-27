@@ -12,7 +12,7 @@
 {{- define "tenant.metadata" -}}
 metadata:
   {{- include "tenant.field" (list "annotations" .annotations 2) }}
-  {{- include "tenant.field" (list "finalizers" .labels 2) }}
+  {{- include "tenant.field" (list "finalizers" .finalizers 2) }}
   {{- include "tenant.field" (list "labels" .labels 2) }}
   {{- include "tenant.field" (list "name" .name 2) }}
   {{- include "tenant.field" (list "namespace" .namespace 2) }}
