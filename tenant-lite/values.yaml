@@ -8,6 +8,7 @@ namespaces:
       name: "{{ .name }}"
     finalizers:
       - foo
+    namespace: this-doesnt-make-sense
   bar:
     annotations: {}
     finalizers: []

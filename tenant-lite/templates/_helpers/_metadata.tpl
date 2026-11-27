@@ -17,3 +17,16 @@ metadata:
   {{- include "tenant.field" (list "name" .name 2) }}
   {{- include "tenant.field" (list "namespace" .namespace 2) }}
 {{- end -}}
+
+{{- define "tenant.metadata-omitting" -}}
+  {{- $data := first . }}
+  {{- $fields := rest . }}
+
+  {{- $metadata := include "tenant.metadata" $data | fromYaml }}
+
+  {{- range $field := $fields }}
+    {{- $_ := unset $metadata.metadata $field }}
+  {{- end }}
+
+  {{- $metadata | toYaml }}
+{{- end -}}

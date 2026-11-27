@@ -3,8 +3,8 @@
 ---
 apiVersion: v1
 kind: Namespace
-{{ include "tenant.metadata" . }}
+{{ include "tenant.metadata-omitting" (list . "finalizers" "namespace") }}
 spec:
-  finalizers: "todo"
+  {{- include "tenant.field" (list "finalizers" .finalizers 2) }}
 {{- end }}
 {{- end }}
