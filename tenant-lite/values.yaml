@@ -116,3 +116,20 @@ networkPolicies:
       ports:
       - protocol: TCP
         port: 5978
+
+roles:
+  pod-reader:
+    rules:
+    - apiGroups: [""] # "" indicates the core API group
+      resources: ["pods"]
+      verbs: ["get", "watch", "list"]
+
+clusterRoles:
+  secret-reader:
+    rules:
+    - apiGroups: [""]
+      #
+      # at the HTTP level, the name of the resource for accessing Secret
+      # objects is "secrets"
+      resources: ["secrets"]
+      verbs: ["get", "watch", "list"]

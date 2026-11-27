@@ -1,0 +1,7 @@
+{{- range include "tenant.datas" (dict "root" $ "values" $.Values.roles "defaults" $.Values.roleDefaults) | fromYamlArray }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+{{ include "tenant.metadata" . }}
+{{- include "tenant.field.list" (list "rules" .rules) }}
+{{- end }}

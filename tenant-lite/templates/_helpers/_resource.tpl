@@ -30,3 +30,19 @@
     {{- $data | toYaml }}
   {{- end }}
 {{- end -}}
+
+{{- define "tenant.datas" -}}
+  {{- $ := .root }}
+  {{- $values := .values }}
+  {{- $defaults := .defaults }}
+
+  {{- $datas := list }}
+
+  {{- range $id, $data := $values }}
+    {{- with include "tenant.data" (dict "root" $ "id" $id "data" $data "defaults" $defaults) | fromYaml }}
+      {{- $datas = append $datas . }}
+    {{- end }}
+  {{- end }}
+
+  {{- $datas | toYaml }}
+{{- end -}}

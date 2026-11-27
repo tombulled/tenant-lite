@@ -1,0 +1,12 @@
+{{- range include "tenant.datas" (dict
+  "root" $
+  "values" $.Values.clusterRoleBindings
+  "defaults" $.Values.clusterRoleBindingDefaults
+) | fromYamlArray }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+{{ include "tenant.metadata-omitting" (list . "namespace") }}
+{{- include "tenant.field" (list "roleRef" .roleRef) }}
+{{- include "tenant.field.list" (list "subjects" .subjects) }}
+{{- end }}
