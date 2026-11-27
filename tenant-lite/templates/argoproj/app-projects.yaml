@@ -1,6 +1,6 @@
 {{- range include "tenant.datas" (dict
-  "root" $
-  "values" $.Values.appProjects
+  "root"     $
+  "values"   $.Values.appProjects
   "defaults" $.Values.appProjectDefaults
 ) | fromYamlArray }}
 ---

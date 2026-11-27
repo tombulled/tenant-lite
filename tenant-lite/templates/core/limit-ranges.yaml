@@ -1,10 +1,12 @@
-{{- range $id, $data := .Values.limitRanges }}
-{{- with include "tenant.data" (dict "root" $ "id" $id "data" $data "defaults" $.Values.limitRangeDefaults) | fromYaml }}
+{{- range include "tenant.datas" (dict
+  "root"     $
+  "values"   $.Values.limitRanges
+  "defaults" $.Values.limitRangeDefaults
+) | fromYamlArray }}
 ---
 apiVersion: v1
 kind: LimitRange
 {{ include "tenant.metadata" . }}
 spec:
   {{- include "tenant.field.list" (list "limits" .limits 2) }}
-{{- end }}
 {{- end }}

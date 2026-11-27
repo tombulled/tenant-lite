@@ -1,10 +1,12 @@
-{{- range $id, $data := .Values.namespaces }}
-{{- with include "tenant.data" (dict "root" $ "id" $id "data" $data "defaults" $.Values.namespaceDefaults) | fromYaml }}
+{{- range include "tenant.datas" (dict
+  "root"     $
+  "values"   $.Values.namespaces
+  "defaults" $.Values.namespaceDefaults
+) | fromYamlArray }}
 ---
 apiVersion: v1
 kind: Namespace
 {{ include "tenant.metadata-omitting" (list . "finalizers" "namespace") }}
 spec:
   {{- include "tenant.field" (list "finalizers" .finalizers 2) }}
-{{- end }}
 {{- end }}
