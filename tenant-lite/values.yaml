@@ -1,159 +1,164 @@
-defaults:
-  annotations:
-    owning-tenant: bob
+# defaults:
+#   annotations:
+#     owning-tenant: bob
+# 
+# namespaceDefaults:
+#   annotations:
+#     is-namespace: "true"
+# 
+# namespaces:
+#   aaa:
+#     name: fu
+#     annotations:
+#       is-cool: "true"
+#       is-awesome: ~
+#       release-name: "{{ $.Release.Name }}"
+#       name: "{{ .name }}"
+#       my-id-is: "{{ .id }}"
+#     finalizers:
+#       - foo
+#     namespace: this-doesnt-make-sense
+#   bbb:
+#     annotations: {}
+#     finalizers: []
+#   ccc: {}
+#   ddd:
+#     enabled: false
+#   eee: ~
+# 
+# resourceQuotaDefaults:
+#   annotations:
+#     is-resource-quota: "true"
+# 
+# resourceQuotas:
+#   aaa:
+#     name: "{{ $.Release.Name }}-{{ .id }}"
+#     annotations:
+#       my-name-is: "{{ .name }}"
+#   bbb: {}
+#   ccc: {}
+# 
+# limitRangeDefaults:
+#   annotations:
+#     is-limit-range: "true"
+# 
+# limitRanges:
+#   aaa:
+#     name: "{{ $.Release.Name }}-{{ .id }}"
+#     annotations:
+#       my-name-is: "{{ .name }}"
+#   bbb:
+#     limits:
+#     - default: # this section defines default limits
+#         cpu: 500m
+#       defaultRequest: # this section defines default requests
+#         cpu: 500m
+#       max: # max and min define the limit range
+#         cpu: "1"
+#       min:
+#         cpu: 100m
+#       type: Container
+#   ccc:
+#     limits:
+#       cpu:
+#         default: # this section defines default limits
+#           cpu: 500m
+#         defaultRequest: # this section defines default requests
+#           cpu: 500m
+#         max: # max and min define the limit range
+#           cpu: "1"
+#         min:
+#           cpu: 100m
+#         type: Container
+# 
+# sealedSecretDefaults:
+#   annotations:
+#     is-sealed-secret: "true"
+# 
+# sealedSecrets:
+#   aaa:
+#     encryptedData:
+#       password: asadasda
+# 
+# networkPolicyDefaults:
+#   annotations:
+#     is-network-policy: "true"
+# 
+# networkPolicies:
+#   aaa:
+#     name: test-network-policy
+#     namespace: default
+#     podSelector:
+#       matchLabels:
+#         role: db
+#     policyTypes:
+#     - Ingress
+#     - Egress
+#     ingress:
+#     - from:
+#       - ipBlock:
+#           cidr: 172.17.0.0/16
+#           except:
+#           - 172.17.1.0/24
+#       - namespaceSelector:
+#           matchLabels:
+#             project: myproject
+#       - podSelector:
+#           matchLabels:
+#             role: frontend
+#       ports:
+#       - protocol: TCP
+#         port: 6379
+#     egress:
+#     - to:
+#       - ipBlock:
+#           cidr: 10.0.0.0/24
+#       ports:
+#       - protocol: TCP
+#         port: 5978
+# 
+# roles:
+#   pod-reader:
+#     rules:
+#     - apiGroups: [""]
+#       resources: ["pods"]
+#       verbs: ["get", "watch", "list"]
+# 
+# clusterRoles:
+#   secret-reader:
+#     rules:
+#     - apiGroups: [""]
+#       resources: ["secrets"]
+#       verbs: ["get", "watch", "list"]
+# 
+# appProjects:
+#   aaa:
+#     description: "Project for {{.name}}"
+#   bbb: {}
+#   ccc: {}
+# 
+# applications:
+#   my-app:
+#     destination:
+#       namespace: bobland
+#     source:
+#       repoURL: google.com
+#     syncPolicy:
+#       automated:
+#         enable: true
+# 
+# applicationSets:
+#   example:
+#     generators:
+#       - list:
+#           elements:
+#             - name: bob
+#               age: 12
+#     template:
+#       spec:
+#         description: foo
 
-namespaceDefaults:
-  annotations:
-    is-namespace: "true"
+defaults: {}
 
-namespaces:
-  aaa:
-    name: fu
-    annotations:
-      is-cool: "true"
-      is-awesome: ~
-      release-name: "{{ $.Release.Name }}"
-      name: "{{ .name }}"
-      my-id-is: "{{ .id }}"
-    finalizers:
-      - foo
-    namespace: this-doesnt-make-sense
-  bbb:
-    annotations: {}
-    finalizers: []
-  ccc: {}
-  ddd:
-    enabled: false
-  eee: ~
-
-resourceQuotaDefaults:
-  annotations:
-    is-resource-quota: "true"
-
-resourceQuotas:
-  aaa:
-    name: "{{ $.Release.Name }}-{{ .id }}"
-    annotations:
-      my-name-is: "{{ .name }}"
-  bbb: {}
-  ccc: {}
-
-limitRangeDefaults:
-  annotations:
-    is-limit-range: "true"
-
-limitRanges:
-  aaa:
-    name: "{{ $.Release.Name }}-{{ .id }}"
-    annotations:
-      my-name-is: "{{ .name }}"
-  bbb:
-    limits:
-    - default: # this section defines default limits
-        cpu: 500m
-      defaultRequest: # this section defines default requests
-        cpu: 500m
-      max: # max and min define the limit range
-        cpu: "1"
-      min:
-        cpu: 100m
-      type: Container
-  ccc:
-    limits:
-      cpu:
-        default: # this section defines default limits
-          cpu: 500m
-        defaultRequest: # this section defines default requests
-          cpu: 500m
-        max: # max and min define the limit range
-          cpu: "1"
-        min:
-          cpu: 100m
-        type: Container
-
-sealedSecretDefaults:
-  annotations:
-    is-sealed-secret: "true"
-
-sealedSecrets:
-  aaa:
-    encryptedData:
-      password: asadasda
-
-networkPolicyDefaults:
-  annotations:
-    is-network-policy: "true"
-
-networkPolicies:
-  aaa:
-    name: test-network-policy
-    namespace: default
-    podSelector:
-      matchLabels:
-        role: db
-    policyTypes:
-    - Ingress
-    - Egress
-    ingress:
-    - from:
-      - ipBlock:
-          cidr: 172.17.0.0/16
-          except:
-          - 172.17.1.0/24
-      - namespaceSelector:
-          matchLabels:
-            project: myproject
-      - podSelector:
-          matchLabels:
-            role: frontend
-      ports:
-      - protocol: TCP
-        port: 6379
-    egress:
-    - to:
-      - ipBlock:
-          cidr: 10.0.0.0/24
-      ports:
-      - protocol: TCP
-        port: 5978
-
-roles:
-  pod-reader:
-    rules:
-    - apiGroups: [""]
-      resources: ["pods"]
-      verbs: ["get", "watch", "list"]
-
-clusterRoles:
-  secret-reader:
-    rules:
-    - apiGroups: [""]
-      resources: ["secrets"]
-      verbs: ["get", "watch", "list"]
-
-appProjects:
-  aaa:
-    description: "Project for {{.name}}"
-  bbb: {}
-  ccc: {}
-
-applications:
-  my-app:
-    destination:
-      namespace: bobland
-    source:
-      repoURL: google.com
-    syncPolicy:
-      automated:
-        enable: true
-
-applicationSets:
-  example:
-    generators:
-      - list:
-          elements:
-            - name: bob
-              age: 12
-    template:
-      spec:
-        description: foo
+# xApplicationSets:
+#   aaa: {}
