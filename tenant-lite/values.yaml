@@ -1,0 +1,7 @@
+namespaces:
+  foo:
+    annotations:
+      is-cool: "true"
+  bar:
+    annotations: {}
+  baz: {}

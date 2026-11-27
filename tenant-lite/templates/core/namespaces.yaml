@@ -1,0 +1,11 @@
+{{- range $id, $_ := .Values.namespaces }}
+{{- $name := .name | default $id }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $name | quote }}
+{{ include "tenant.metadata" . }}
+spec:
+  finalizers: []
+{{- end }}
