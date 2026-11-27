@@ -2,9 +2,12 @@ namespaces:
   foo:
     annotations:
       is-cool: "true"
+      is-awesome: ~
     finalizers:
       - foo
   bar:
     annotations: {}
     finalizers: []
-  baz: {}
+  baz:
+    enabled: false
+  dog: ~

@@ -1,4 +1,7 @@
 {{- range $id, $_ := .Values.namespaces }}
+{{- if eq .enabled false }}
+  {{- continue }}
+{{- end }}
 {{- if eq .name nil }}
   {{- $_ := set . "name" $id }}
 {{- end }}
