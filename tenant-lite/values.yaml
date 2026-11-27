@@ -1,17 +1,24 @@
 namespaces:
-  foo:
+  aaa:
     name: fu
     annotations:
       is-cool: "true"
       is-awesome: ~
       release-name: "{{ $.Release.Name }}"
       name: "{{ .name }}"
+      my-id-is: "{{ .id }}"
     finalizers:
       - foo
     namespace: this-doesnt-make-sense
-  bar:
+  bbb:
     annotations: {}
     finalizers: []
-  baz:
+  ccc: {}
+  ddd:
     enabled: false
-  dog: ~
+  eee: ~
+
+resourceQuotas:
+  aaa: {}
+  bbb: {}
+  ccc: {}

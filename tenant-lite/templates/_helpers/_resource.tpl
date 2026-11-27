@@ -3,6 +3,9 @@
   {{- $id := .id }}
   {{- $data := .data }}
 
+  {{- /* Propagate the resource ID so it can be used during self-templating */ -}}
+  {{- $_ := set $data "id" $id }}
+
   {{- if ne $data.enabled false }}
     {{- if eq $data.name nil }}
       {{- $_ := set $data "name" $id }}

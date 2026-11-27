@@ -1,0 +1,12 @@
+{{- range $id, $data := .Values.resourceQuotas }}
+{{- with include "tenant.data" (dict "root" $ "id" $id "data" $data) | fromYaml }}
+---
+apiVersion: v1
+kind: ResourceQuota
+{{ include "tenant.metadata" . }}
+spec:
+  {{- include "tenant.field" (list "hard" .hard 2) }}
+  {{- include "tenant.field" (list "scopeSelector" .scopeSelector 2) }}
+  {{- include "tenant.field" (list "scopes" .scopes 2) }}
+{{- end }}
+{{- end }}
