@@ -37,3 +37,36 @@ resourceQuotas:
       my-name-is: "{{ .name }}"
   bbb: {}
   ccc: {}
+
+limitRangeDefaults:
+  annotations:
+    is-limit-range: "true"
+
+limitRanges:
+  aaa:
+    name: "{{ $.Release.Name }}-{{ .id }}"
+    annotations:
+      my-name-is: "{{ .name }}"
+  bbb:
+    limits:
+    - default: # this section defines default limits
+        cpu: 500m
+      defaultRequest: # this section defines default requests
+        cpu: 500m
+      max: # max and min define the limit range
+        cpu: "1"
+      min:
+        cpu: 100m
+      type: Container
+  ccc:
+    limits:
+      cpu:
+        default: # this section defines default limits
+          cpu: 500m
+        defaultRequest: # this section defines default requests
+          cpu: 500m
+        max: # max and min define the limit range
+          cpu: "1"
+        min:
+          cpu: 100m
+        type: Container

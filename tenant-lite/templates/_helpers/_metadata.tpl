@@ -9,6 +9,19 @@
   {{- end -}}
 {{- end -}}
 
+{{- define "tenant.field.list" -}}
+  {{- $_args := concat . (list nil nil nil) -}}
+  {{- $name := index $_args 0 -}}
+  {{- $value := index $_args 1 -}}
+  {{- $indent := index $_args 2 | default 0 -}}
+
+  {{- if kindIs "map" $value -}}
+    {{- $value = values $value -}}
+  {{- end -}}
+ 
+  {{- include "tenant.field" (list $name $value $indent) -}}
+{{- end -}}
+
 {{- define "tenant.metadata" -}}
 metadata:
   {{- include "tenant.field" (list "annotations" .annotations 2) }}
