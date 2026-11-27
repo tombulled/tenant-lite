@@ -159,6 +159,3 @@
 #         description: foo
 
 defaults: {}
-
-# xApplicationSets:
-#   aaa: {}

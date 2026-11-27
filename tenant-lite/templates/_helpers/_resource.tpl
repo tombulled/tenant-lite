@@ -5,6 +5,11 @@
   {{- $data := .data }}
   {{- $defaults := .defaults | default dict }}
 
+  {{- /* If the resource data is nil, disable the resource */ -}}
+  {{- if eq $data nil -}}
+    {{- $data = dict "enabled" false -}}
+  {{- end }}
+
   {{- /* Apply defaults */ -}}
   {{- $data = mustMergeOverwrite
     (deepCopy $.Values.defaults)

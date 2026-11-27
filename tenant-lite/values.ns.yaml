@@ -1,0 +1,7 @@
+defaults:
+  annotations:
+    is-cool: ~
+
+# namespacesx:
+#   tomtest: {}
+#   core: ~
