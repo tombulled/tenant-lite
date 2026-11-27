@@ -3,9 +3,8 @@
 ---
 apiVersion: v1
 kind: Namespace
-metadata:
-  name: {{ $name | quote }}
 {{ include "tenant.metadata" . }}
+{{ omit (include "tenant.metadata" . | fromYaml) "namespace" "finalizers" }}
 spec:
   finalizers: []
 {{- end }}
