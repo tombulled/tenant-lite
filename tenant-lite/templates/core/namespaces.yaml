@@ -1,5 +1,5 @@
 {{- range $id, $data := .Values.namespaces }}
-{{- with include "tenant.data" (dict "id" $id "data" $data) | fromYaml }}
+{{- with include "tenant.data" (dict "root" $ "id" $id "data" $data) | fromYaml }}
 ---
 apiVersion: v1
 kind: Namespace

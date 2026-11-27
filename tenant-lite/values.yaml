@@ -1,8 +1,11 @@
 namespaces:
   foo:
+    name: fu
     annotations:
       is-cool: "true"
       is-awesome: ~
+      release-name: "{{ $.Release.Name }}"
+      name: "{{ .name }}"
     finalizers:
       - foo
   bar:
@@ -11,8 +14,3 @@ namespaces:
   baz:
     enabled: false
   dog: ~
-
-humans:
-  cat: {}
-  dog: {}
-  bat: {}
