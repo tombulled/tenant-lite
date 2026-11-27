@@ -11,3 +11,8 @@ namespaces:
   baz:
     enabled: false
   dog: ~
+
+humans:
+  cat: {}
+  dog: {}
+  bat: {}
