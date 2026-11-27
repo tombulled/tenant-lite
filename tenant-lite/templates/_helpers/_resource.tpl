@@ -1,14 +1,14 @@
 {{- define "tenant.data" -}}
+  {{- /* Extract arguments */ -}}
   {{- $ := .root }}
   {{- $id := .id }}
   {{- $data := .data }}
-  {{- $defaults := .defaults }}
+  {{- $defaults := .defaults | default dict }}
 
-  {{- /* Merge the resource data with defaults */ -}}
-    {{- $data = mustMergeOverwrite
-    (dict)
-    ($.Values.defaults | default dict | deepCopy)
-    ($defaults | default dict | deepCopy)
+  {{- /* Apply defaults */ -}}
+  {{- $data = mustMergeOverwrite
+    (deepCopy $.Values.defaults)
+    (deepCopy $defaults)
     (deepCopy $data)
   }}
 
@@ -20,6 +20,9 @@
     {{- if eq $data.name nil }}
       {{- $_ := set $data "name" $id }}
     {{- end }}
+
+    {{- /* Template the resource's name first */ -}}
+    {{- $_ := set $data "name" (include "common.tplvalues.render" (dict "value" $data.name "context" $ "scope" $data)) }}
 
     {{- /* Template the resource's data using itself */ -}}
     {{- $data = include "common.tplvalues.render" (dict "value" $data "context" $ "scope" $data) | fromYaml }}

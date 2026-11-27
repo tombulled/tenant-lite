@@ -31,6 +31,9 @@ resourceQuotaDefaults:
     is-resource-quota: "true"
 
 resourceQuotas:
-  aaa: {}
+  aaa:
+    name: "{{ $.Release.Name }}-{{ .id }}"
+    annotations:
+      my-name-is: "{{ .name }}"
   bbb: {}
   ccc: {}
