@@ -1,0 +1,21 @@
+{{- range include "tenant.datas" (dict
+  "root"     $
+  "values"   $.Values.applicationSets
+  "defaults" $.Values.applicationSetDefaults
+) | fromYamlArray }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+{{ include "tenant.metadata" . }}
+spec:
+  {{- include "tenant.field"      (list "applyNestedSelectors"         .applyNestedSelectors         2) }}
+  {{- include "tenant.field.list" (list "generators"                   .generators                   2) }}
+  {{- include "tenant.field"      (list "goTemplate"                   .goTemplate                   2) }}
+  {{- include "tenant.field.list" (list "goTemplateOptions"            .goTemplateOptions            2) }}
+  {{- include "tenant.field.list" (list "ignoreApplicationDifferences" .ignoreApplicationDifferences 2) }}
+  {{- include "tenant.field"      (list "preservedFields"              .preservedFields              2) }}
+  {{- include "tenant.field"      (list "strategy"                     .strategy                     2) }}
+  {{- include "tenant.field"      (list "syncPolicy"                   .syncPolicy                   2) }}
+  {{- include "tenant.field"      (list "template"                     .template                     2) }}
+  {{- include "tenant.field"      (list "templatePatch"                .templatePatch                2) }}
+{{- end }}

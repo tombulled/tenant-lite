@@ -146,3 +146,14 @@ applications:
     syncPolicy:
       automated:
         enable: true
+
+applicationSets:
+  example:
+    generators:
+      - list:
+          elements:
+            - name: bob
+              age: 12
+    template:
+      spec:
+        description: foo
