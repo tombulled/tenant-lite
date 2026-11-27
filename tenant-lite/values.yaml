@@ -1,3 +1,7 @@
+defaults:
+  annotations:
+    owning-tenant: bob
+
 namespaceDefaults:
   annotations:
     is-namespace: "true"
@@ -21,6 +25,10 @@ namespaces:
   ddd:
     enabled: false
   eee: ~
+
+resourceQuotaDefaults:
+  annotations:
+    is-resource-quota: "true"
 
 resourceQuotas:
   aaa: {}

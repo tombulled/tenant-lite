@@ -1,6 +1,7 @@
 {{- range $id, $data := .Values.namespaces }}
 {{- $data = mustMergeOverwrite
   (dict)
+  ($.Values.defaults | default dict | deepCopy)
   ($.Values.namespaceDefaults | default dict | deepCopy)
   (deepCopy $data)
 }}

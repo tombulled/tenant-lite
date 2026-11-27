@@ -1,6 +1,7 @@
 {{- range $id, $data := .Values.resourceQuotas }}
 {{- $data = mustMergeOverwrite
   (dict)
+  ($.Values.defaults | default dict | deepCopy)
   ($.Values.resourceQuotaDefaults | default dict | deepCopy)
   (deepCopy $data)
 }}
