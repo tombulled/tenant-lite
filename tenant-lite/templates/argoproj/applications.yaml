@@ -1,0 +1,19 @@
+{{- range include "tenant.datas" (dict
+  "root" $
+  "values" $.Values.applications
+  "defaults" $.Values.applicationDefaults
+) | fromYamlArray }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+{{ include "tenant.metadata" . }}
+spec:
+  {{- include "tenant.field"      (list "destination"       .destination       2) }}
+  {{- include "tenant.field.list" (list "ignoreDifferences" .ignoreDifferences 2) }}
+  {{- include "tenant.field.list" (list "info"              .info              2) }}
+  {{- include "tenant.field"      (list "project"           .project           2) }}
+  {{- include "tenant.field"      (list "source"            .source            2) }}
+  {{- include "tenant.field"      (list "sourceHydrator"    .sourceHydrator    2) }}
+  {{- include "tenant.field.list" (list "sources"           .sources           2) }}
+  {{- include "tenant.field"      (list "syncPolicy"        .syncPolicy        2) }}
+{{- end }}

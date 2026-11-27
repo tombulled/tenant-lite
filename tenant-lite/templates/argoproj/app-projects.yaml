@@ -1,0 +1,26 @@
+{{- range include "tenant.datas" (dict
+  "root" $
+  "values" $.Values.appProjects
+  "defaults" $.Values.appProjectDefaults
+) | fromYamlArray }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+{{ include "tenant.metadata" . }}
+spec:
+  {{- include "tenant.field.list" (list "clusterResourceBlacklist"        .clusterResourceBlacklist        2) }}
+  {{- include "tenant.field.list" (list "clusterResourceWhitelist"        .clusterResourceWhitelist        2) }}
+  {{- include "tenant.field"      (list "description"                     .description                     2) }}
+  {{- include "tenant.field.list" (list "destinationServiceAccounts"      .destinationServiceAccounts      2) }}
+  {{- include "tenant.field.list" (list "destinations"                    .destinations                    2) }}
+  {{- include "tenant.field.list" (list "namespaceResourceBlacklist"      .namespaceResourceBlacklist      2) }}
+  {{- include "tenant.field.list" (list "namespaceResourceWhitelist"      .namespaceResourceWhitelist      2) }}
+  {{- include "tenant.field"      (list "orphanedResources"               .orphanedResources               2) }}
+  {{- include "tenant.field"      (list "permitOnlyProjectScopedClusters" .permitOnlyProjectScopedClusters 2) }}
+  {{- include "tenant.field.list" (list "roles"                           .roles                           2) }}
+  {{- include "tenant.field.list" (list "signatureKeys"                   .signatureKeys                   2) }}
+  {{- include "tenant.field"      (list "sourceIntegrity"                 .sourceIntegrity                 2) }}
+  {{- include "tenant.field.list" (list "sourceNamespaces"                .sourceNamespaces                2) }}
+  {{- include "tenant.field.list" (list "sourceRepos"                     .sourceRepos                     2) }}
+  {{- include "tenant.field.list" (list "syncWindows"                     .syncWindows                     2) }}
+{{- end }}
